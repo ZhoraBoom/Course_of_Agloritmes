@@ -7,7 +7,7 @@ class MaxHeap {
   void Insert(int64_t x, int lim);
   void ExtractMax();
   int GetMax() const;
-  int Size() const;
+  size_t Size() const;
 
  private:
   void SiftDown(std::vector<int64_t>& array, int iter);
@@ -27,7 +27,7 @@ void MaxHeap::SiftUp(std::vector<int64_t>& array, int iterator) {
 }
 
 void MaxHeap::SiftDown(std::vector<int64_t>& array, int iter) {
-  while (2 * iter + 2 < (int)array.size()) {
+  while (2 * iter + 2 < static_cast<int>(array.size())) {
     if (array[iter] < std::max(array[2 * iter + 1], array[2 * iter + 2])) {
       if (array[2 * iter + 1] > array[2 * iter + 2]) {
         std::swap(array[iter], array[2 * iter + 1]);
@@ -40,24 +40,24 @@ void MaxHeap::SiftDown(std::vector<int64_t>& array, int iter) {
       break;
     }
   }
-  if ((int)array.size() - 1 == 2 * iter + 1 &&
+  if (static_cast<int>(array.size()) - 1 == 2 * iter + 1 &&
       array[iter] < array[iter * 2 + 1]) {
     std::swap(array[iter], array[2 * iter + 1]);
   }
 }
 
-int MaxHeap::Size() const { return (int)perm_arr_.size(); }
+size_t MaxHeap::Size() const { return static_cast<size_t>(perm_arr_.size()); }
 
 void MaxHeap::Insert(int64_t x, int lim) {
-  if ((int)perm_arr_.size() == lim) {
+  if (static_cast<int>(perm_arr_.size()) == lim) {
     if (x < GetMax()) {
       ExtractMax();
       perm_arr_.push_back(x);
-      SiftUp(perm_arr_, (int)perm_arr_.size() - 1);
+      SiftUp(perm_arr_, static_cast<int>(perm_arr_.size()) - 1);
     }
   } else {
     perm_arr_.push_back(x);
-    SiftUp(perm_arr_, (int)perm_arr_.size() - 1);
+    SiftUp(perm_arr_, static_cast<int>(perm_arr_.size()) - 1);
   }
 }
 
