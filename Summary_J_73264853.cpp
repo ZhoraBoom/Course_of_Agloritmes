@@ -11,7 +11,7 @@ class MinHeap {
 
   void Insert(T value);
 
-  bool Empty();
+  bool Empty() const;
 
  private:
   void SiftUp(size_t index);
@@ -70,7 +70,7 @@ std::optional<T> MinHeap<T>::ExtractMin() {
 }
 
 template <typename T>
-bool MinHeap<T>::Empty() {
+bool MinHeap<T>::Empty() const {
   return size_ == 0;
 }
 
